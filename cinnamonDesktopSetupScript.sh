@@ -210,7 +210,7 @@ echo "Done."
 # 2. Alacritty
 
 # 2.1. Add PPA repo to the apt 
-#sudo add-apt-repository ppa:aslatter/ppa
+sudo add-apt-repository ppa:aslatter/ppa -y
 
 # 2.2 Install alacritty
 sudo apt install alacritty
@@ -226,10 +226,11 @@ sudo update-alternatives --remove "x-terminal-emulator" /usr/bin/gnome-terminal.
 # 2.4. Configure alacritty script
 # 2.4.1. Add a new folder for alacritty
 echo "Configuring alacritty.yml..."
-sudo mkdir -p "$HOME/.config/alacritty"
+
+mkdir "$HOME/.config/alacritty"
 
 # 2.4.2. Add config file
-sudo cat <<'EOF' > $HOME/.config/alacritty/alacritty.yml
+cat <<EOF > $HOME/.config/alacritty/alacritty.yml
 window:
   dynamic_title: true
   startup_mode: Windowed
@@ -269,27 +270,28 @@ schemes:
   darcula: &darcula
     primary:
       background: '#414141'
-      foreground: '0xf8f8f2'
+      foreground: '#f8f8f2'
     normal:
-      black:   '0x000000'
-      red:     '0xff5555'
-      green:   '0x50fa7b'
-      yellow:  '0xf1fa8c'
-      blue:    '0xcaa9fa'
-      magenta: '0xff79c6'
-      cyan:    '0x8be9fd'
-      white:   '0xbfbfbf'
+      black:   '#000000'
+      red:     '#ff5555'
+      green:   '#50fa7b'
+      yellow:  '#f1fa8c'
+      blue:    '#caa9fa'
+      magenta: '#ff79c6'
+      cyan:    '#8be9fd'
+      white:   '#bfbfbf'
     bright:
-      black:   '0x282a35'
-      red:     '0xff6e67'
-      green:   '0x5af78e'
-      yellow:  '0xf4f99d'
-      blue:    '0xcaa9fa'
-      magenta: '0xff92d0'
-      cyan:    '0x9aedfe'
-      white:   '0xe6e6e6'
+      black:   '#282a35'
+      red:     '#ff6e67'
+      green:   '#5af78e'
+      yellow:  '#f4f99d'
+      blue:    '#caa9fa'
+      magenta: '#ff92d0'
+      cyan:    '#9aedfe'
+      white:   '#e6e6e6'
 
 colors: *darcula
+
 EOF
 echo "Done."
 # 3. Setting up cinnamon desktop
@@ -402,7 +404,19 @@ echo "Done."
 
 # Installing custom software from official repos
 
-sudo apt install codium sublime-text steam blender
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
+    | sudo tee /etc/apt/sources.list.d/vscodium.list
+
+sudo apt update && sudo apt install codium
+
+sudo apt install codium 
+sudo apt install sublime-text 
+sudo apt install steam 
+sudo apt install blender
 
 # Installing from flatpak
 
