@@ -3,7 +3,7 @@
 sudo apt update
 sudo apt upgrade
 
-# Install necesary software for script to work.
+# Install necessary software for script to work.
 sudo apt install jq 
 
 
@@ -392,7 +392,7 @@ gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/d
 
 # 3.3.3.2. custom1/ - Launch Alacritty Terminal
 gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ name 'Launch Alacritty Terminal'
-gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ binding "['<Shift><Alt>Return']"
+gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ binding "['<Shift><Alt><Return>']"
 gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ command 'alacritty'
 #dconf write /org/cinnamon/desktop/keybindings/custom-list/custom1/ binding "['<Shift><Alt>Return']"
 
@@ -402,11 +402,12 @@ echo "Done."
 
 # Installing custom software from official repos
 
-#sudo apt install codium sublime-text steam
+sudo apt install codium sublime-text steam blender
 
 # Installing from flatpak
 
-#sudo flatpak install flathub com.discordapp.Discord
+sudo flatpak install flathub com.discordapp.Discord
+sudo flatpak install flathub com.google.AndroidStudio
 
 # Panel settings
 echo "Setting up panel grouped items..."
@@ -415,7 +416,7 @@ replace_applets() {
     local configDirectory="$HOME/.config/cinnamon/spices/grouped-window-list@cinnamon.org"
 
     if [ -f "$config_file" ]; then
-        jq '.["pinned-apps"]["value"] = ["nemo.desktop", "firefox.deskop", "com.alacritty.Alacritty.desktop", "com.discordapp.Discord.desktop:flatpak", "codium.desktop", "sublime_text.desktop", "steam.desktop"]' "$config_file" > $configDirectory/replacement.json
+        jq '.["pinned-apps"]["value"] = ["nemo.desktop", "firefox.desktop", "com.alacritty.Alacritty.desktop", "com.discordapp.Discord.desktop:flatpak", "codium.desktop", "blender.desktop", "com.google.AndroidStudio.desktop:flatpak", "sublime_text.desktop", "steam.desktop"]' "$config_file" > $configDirectory/replacement.json
         mv "$configDirectory/replacement.json" "$configDirectory/2.json" 
     else
         echo "Configuration file not found: $config_file"
