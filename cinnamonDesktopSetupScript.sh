@@ -417,6 +417,7 @@ sudo apt install codium
 sudo apt install sublime-text 
 sudo apt install steam 
 sudo apt install blender
+sudo apt install deluge
 
 # Installing from flatpak
 
